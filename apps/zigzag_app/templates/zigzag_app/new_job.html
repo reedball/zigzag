@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+    <div id="wrapper">
+        <div>
+            <h2 style="display:inline-block">Hello {{reg_user.first_name}}! Create a job!</h2>
+            <a style="display: inline-block;" href="/logout">Logout</a>
+        </div>
+
+        <form action="/addjob" method="POST">
+            {%csrf_token%}
+            <div>
+                <label>Title:</label>
+                <input name="title" type="text">
+            </div>
+            <div>
+                <label>Description:</label>
+                <input name="description" type="text">
+            </div>
+            <div>
+                <label>Location:</label>
+                <input name="location" type="text">
+            </div>
+            <div>
+                <p style="display:inline-block; color:blueviolet; vertical-align: top;">Category:</p>
+                <div style="display:inline-block; color:blueviolet">
+                    <div>
+                        <label>Pet Care:</label>
+                        <input name="category" type="checkbox">
+                    </div>
+                    <div>
+                            <label>Electrical:</label>
+                            <input name="category" type="checkbox">
+                    </div>
+                    <div>
+                        <label>Garden:</label>
+                        <input name="category" type="checkbox">
+                    </div>
+                    <div>
+                        <label>other:</label>
+                        <input name="category" type="text">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a href="/jobs">Cancel</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        {% if messages %}
+        <ulcopy class="messages" style="color:red">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+* {
+    margin: auto;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  #wrapper{
+      background-color: rgb(49, 55, 61);
+      color:white;
+      width:1000px;
+      height:1000px;
+  }

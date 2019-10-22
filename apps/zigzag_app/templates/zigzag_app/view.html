@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stats</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+    <div id="wrapper">
+        <div>
+            <h2 style="display:inline-block">Hello {{reg_user.first_name}}! These are the job details!</h2>
+            <a href="/jobs" style="display: inline-block;">Dashboard</a>
+            <a href="/logout" style="display: inline-block">Logout</a>
+        </div>
+        <div>
+            <h4>{{selected_job.title}}</h4>
+            <p>{{selected_job.description}}</p>
+            <p>Location: {{selected_job.location}}</p>
+            <p>Categories: {{selected_job.category}}</p>
+            <p>Posted by: {{selected_job.created_by.first_name}}</p>
+            <p>Posted on: {{selected_job.created_at}}</p>            
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wishes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+    <div id="wrapper">
+        <div>
+            <h2 style="display:inline-block">Welcome {{reg_user.first_name}}</h2>
+            <a href="/logout" style="display:inline-block">Logout</a>
+            <a href="/jobs/new">New Job!</a>
+        </div>
+        <div>
+            <h3>Everyone's jobs:</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                    <th scope="col">Job</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job in everybodys_jobs %}
+                    <tr>
+                    <td>{{job.title}}</td>
+                    <td>{{job.location}}</td>
+                    {% if job.created_by.id == request.session.id %}
+                        <td><a href="/jobs/{{job.id}}">View</a> <a href="/remove/{{job.id}}">Remove</a> <a href="/edit/{{job.id}}">Edit</a> <a href="/add/{{job.id}}">Add</a></td>
+                    {% else %}
+                        <td><a href="/jobs/{{job.id}}">View</a> <a href="/add/{{job.id}}">Add</a></td>
+                    {%endif%}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3>{{reg_user.first_name}}'s Jobs:</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                    <th scope="col">Job</th>
+                    <th scope="col">Actions</th>
+                </thead>
+                <tbody>
+                    {% for job in chosen_job %}
+                    <tr>
+                        <td>{{job.title}}</td>
+                        <td><a href="/jobs/{{job.id}}">View</a> <a href="/remove/{{job.id}}">Remove</a> <a href="/giveup/{{job.id}}">Give Up</a> </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
